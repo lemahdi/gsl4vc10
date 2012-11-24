@@ -25,7 +25,7 @@
 
 /* Define to 1 if you have the declaration of `feenableexcept', and to 0 if
    you don't. */
-#define HAVE_DECL_FEENABLEEXCEPT 1
+#define HAVE_DECL_FEENABLEEXCEPT 0
 
 /* Define to 1 if you have the declaration of `fesettrapenable', and to 0 if
    you don't. */
@@ -83,7 +83,7 @@
 /* #undef HAVE_FPU_X86_SSE */
 
 /* Define to 1 if you have the <ieeefp.h> header file. */
-#define HAVE_IEEEFP_H 1
+#define HAVE_IEEEFP_H 0
 
 /* Define this if IEEE comparisons work correctly (e.g. NaN != NaN) */
 #define HAVE_IEEE_COMPARISONS 1
@@ -191,6 +191,9 @@
    calls it, or to nothing if 'inline' is not supported under any name.  */
 #ifndef __cplusplus
 /* #undef inline */
+#ifdef _MSC_VER
+#define inline __inline
+#endif
 #endif
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */

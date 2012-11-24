@@ -186,12 +186,18 @@
 #error unknown BASE_ directive in source.h
 #endif
 
-#define CONCAT2x(a,b) a ## _ ## b 
-#define CONCAT2(a,b) CONCAT2x(a,b)
+#define CONCAT2x(a,b) a ## _ ## b
 #define CONCAT3x(a,b,c) a ## _ ## b ## _ ## c
-#define CONCAT3(a,b,c) CONCAT3x(a,b,c)
 #define CONCAT4x(a,b,c,d) a ## _ ## b ## _ ## c ## _ ## d
+#if defined(BASE_GSL_COMPLEX) && defined(_MSC_VER)
+#define CONCAT2 CONCAT2x
+#define CONCAT3 CONCAT3x
+#define CONCAT4 CONCAT4x
+#else
+#define CONCAT2(a,b) CONCAT2x(a,b)
+#define CONCAT3(a,b,c) CONCAT3x(a,b,c)
 #define CONCAT4(a,b,c,d) CONCAT4x(a,b,c,d)
+#endif
 
 #ifndef USE_QUALIFIER
 #define QUALIFIER
@@ -205,17 +211,30 @@
 #define QUALIFIED_TYPE(dir) QUALIFIER dir
 #define QUALIFIED_VIEW(dir,name) CONCAT3(dir,QUALIFIER,name)
 #else
-#define FUNCTION(a,c) CONCAT4(a,SHORT,QUALIFIER,c)
-#define TYPE(dir) CONCAT2(dir,SHORT)
-#define VIEW(dir,name) CONCAT3(dir,SHORT,name)
-#define QUALIFIED_TYPE(dir) QUALIFIER CONCAT2(dir,SHORT)
-#define QUALIFIED_VIEW(dir,name) CONCAT4(dir,SHORT,QUALIFIER,name)
+  #if defined(BASE_GSL_COMPLEX) && defined(_MSC_VER)
+  #define FUNCTION(a,c) CONCAT4(a,complex,const,c)
+  #define TYPE(dir) CONCAT2(dir,complex)
+  #define VIEW(dir,name) CONCAT3(dir,complex,name)
+  #define QUALIFIED_TYPE(dir) const CONCAT2(dir,complex)
+  #define QUALIFIED_VIEW(dir,name) CONCAT4(dir,complex,const,name)
+  #else
+  #define FUNCTION(a,c) CONCAT4(a,SHORT,QUALIFIER,c)
+  #define TYPE(dir) CONCAT2(dir,SHORT)
+  #define VIEW(dir,name) CONCAT3(dir,SHORT,name)
+  #define QUALIFIED_TYPE(dir) QUALIFIER CONCAT2(dir,SHORT)
+  #define QUALIFIED_VIEW(dir,name) CONCAT4(dir,SHORT,QUALIFIER,name)
+  #endif
 #endif
 #if defined(BASE_GSL_COMPLEX)
 #define REAL_TYPE(dir) dir
 #define REAL_VIEW(dir,name) CONCAT2(dir,name)
-#define QUALIFIED_REAL_TYPE(dir) QUALIFIER dir
-#define QUALIFIED_REAL_VIEW(dir,name) CONCAT3(dir,QUALIFIER,name)
+  #ifdef _MSC_VER
+  #define QUALIFIED_REAL_TYPE(dir) const dir
+  #define QUALIFIED_REAL_VIEW(dir,name) CONCAT3(dir,const,name)
+  #else
+  #define QUALIFIED_REAL_TYPE(dir) QUALIFIER dir
+  #define QUALIFIED_REAL_VIEW(dir,name) CONCAT3(dir,QUALIFIER,name)
+  #endif
 #else
 #define REAL_TYPE(dir) CONCAT2(dir,SHORT_REAL)
 #define REAL_VIEW(dir,name) CONCAT3(dir,SHORT_REAL,name)
@@ -230,11 +249,18 @@
 #define QUALIFIED_TYPE(dir) TYPE(dir)
 #define QUALIFIED_VIEW(dir,name) CONCAT2(dir,name)
 #else
-#define FUNCTION(a,c) CONCAT3(a,SHORT,c)
-#define TYPE(dir) CONCAT2(dir,SHORT)
-#define VIEW(dir,name) CONCAT3(dir,SHORT,name)
+  #if defined(BASE_GSL_COMPLEX) && defined(_MSC_VER)
+  #define FUNCTION(a,c) CONCAT3(a,complex,c)
+  #define TYPE(dir) CONCAT2(dir,complex)
+  #define VIEW(dir,name) CONCAT3(dir,complex,name)
+  #define QUALIFIED_VIEW(dir,name) CONCAT3(dir,complex,name)
+  #else
+  #define FUNCTION(a,c) CONCAT3(a,SHORT,c)
+  #define TYPE(dir) CONCAT2(dir,SHORT)
+  #define VIEW(dir,name) CONCAT3(dir,SHORT,name)
+  #define QUALIFIED_VIEW(dir,name) CONCAT3(dir,SHORT,name)
+  #endif
 #define QUALIFIED_TYPE(dir) TYPE(dir)
-#define QUALIFIED_VIEW(dir,name) CONCAT3(dir,SHORT,name)
 #endif
 #if defined(BASE_GSL_COMPLEX)
 #define REAL_TYPE(dir) dir
