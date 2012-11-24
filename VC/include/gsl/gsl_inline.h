@@ -50,6 +50,9 @@
 #  if defined(__GNUC_STDC_INLINE__) || defined(GSL_C99_INLINE) || defined(HAVE_C99_INLINE)
 #    define INLINE_DECL inline  /* use C99 inline */
 #    define INLINE_FUN inline
+#  elif defined(_MSC_VER)
+#    define INLINE_DECL __inline
+#    define INLINE_FUN __inline
 #  else
 #    define INLINE_DECL         /* use GNU extern inline */
 #    define INLINE_FUN extern inline
