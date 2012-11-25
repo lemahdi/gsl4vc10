@@ -6,6 +6,7 @@
 #include <config.h>
 #endif
 
+#ifndef _MSC_VER
 void *
 memcpy (destaddr, srcaddr, len)
      void *destaddr;
@@ -18,3 +19,4 @@ memcpy (destaddr, srcaddr, len)
     *dest++ = *src++;
   return destaddr;
 }
+#endif

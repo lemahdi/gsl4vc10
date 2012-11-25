@@ -375,7 +375,6 @@
     <ClCompile Include="..\..\roots\secant.c" />
     <ClCompile Include="..\..\roots\steffenson.c" />
     <ClCompile Include="..\..\siman\siman.c" />
-    <ClCompile Include="..\..\siman\siman_tsp.c" />
     <ClCompile Include="..\..\sort\sort.c" />
     <ClCompile Include="..\..\sort\sortind.c" />
     <ClCompile Include="..\..\sort\sortvec.c" />
