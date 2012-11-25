@@ -36,7 +36,6 @@
 /VC/VC/Debug/run.obj
 /VC/VC/Debug/vc100.idb
 /VC/VC/Debug/vc100.pdb
-/VC/VC/VC.vcxproj.filters
 /VC/VC/VC.vcxproj.user
 /VC/cblas/Debug/CL.read.1.tlog
 /VC/cblas/Debug/CL.write.1.tlog
@@ -238,7 +237,6 @@
 /VC/cblas/Debug/ztrmv.obj
 /VC/cblas/Debug/ztrsm.obj
 /VC/cblas/Debug/ztrsv.obj
-/VC/cblas/cblas.vcxproj.filters
 /VC/cblas/cblas.vcxproj.user
 /VC/ipch/cblas-df79c0c1/cblas-e7575e91.ipch
 /VC/ipch/vc-6a92bf89/vc-585503a5.ipch
@@ -1052,5 +1050,4 @@
 /wavelet/.deps/test.Po
 /wavelet/.deps/wavelet.Plo
 /wavelet/Makefile
-/VC/gsl/gsl.vcxproj.filters
 /VC/gsl/gsl.vcxproj.user
